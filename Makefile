@@ -23,6 +23,8 @@ test:
 	-$(MAKE) clean
 	python3 test.py
 
+camera:
+	python3 ./src/takepicture.py
 
 # --------
 # Docker scripts
