@@ -14,17 +14,18 @@ NAME := cat-cnn
 	@echo "See make file for docker commands"
 
 run:
-	python3 ./src/main.py
+	python3 ./src/main.py $(path)
 
 clean:
-	rm *.png
-
-test:
-	-$(MAKE) clean
-	python3 test.py
+	rm -rf makedata-batched-images ./src/__pycache__
 
 camera:
 	python3 ./src/takepicture.py
+
+
+
+
+
 
 # --------
 # Docker scripts

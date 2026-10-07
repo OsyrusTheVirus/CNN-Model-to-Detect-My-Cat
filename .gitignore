@@ -7,4 +7,4 @@
 !run-docker.ps1
 !Makefile
 !src
-!src/*
+!src/*.py
