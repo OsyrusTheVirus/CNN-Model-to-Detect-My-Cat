@@ -10,7 +10,7 @@ RUN pip install --upgrade pip
 RUN pip --version
 
 # installing make to use the make file
-RUN apt-get -y install make
+RUN apt-get -y install make && rm -rf /var/list/apt/lists/*
 
 # pytorch cpu version only (I'm not using a GPU, so I'm ignoring GPU libraries)
 RUN pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
