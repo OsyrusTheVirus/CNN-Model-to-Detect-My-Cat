@@ -12,6 +12,7 @@ class MakeData:
     def __init__(self, path: str, augment: bool):
         self.path: str = path
         self.loader: DataLoader = None
+        self.augment: bool = augment
 
         transform_list = [
             v2.Resize((64, 64)),                   # shrinks aspect ratio to value x value
@@ -19,7 +20,7 @@ class MakeData:
             v2.ToDtype(torch.float32, scale=True), # turns values from 0 to 255 to 0.0 to 1.0 (dividing by 255)
         ]
 
-        if augment:
+        if self.augment:
             # augmentation transformations
             transform_list.append(v2.RandomHorizontalFlip(p=0.5))
             transform_list.append(v2.RandomRotation(degrees=15))
@@ -39,7 +40,7 @@ class MakeData:
         Applies transformers on data
         """
         partyset = datasets.ImageFolder(self.path, transform=self.transformer, loader=self.__load_image)
-        self.loader = DataLoader(partyset, batch_size=20, shuffle=True)
+        self.loader = DataLoader(partyset, batch_size=20, shuffle=self.augment)
 
     def get_loader(self) -> DataLoader | None:
         """
